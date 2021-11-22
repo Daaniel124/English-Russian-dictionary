@@ -1,3 +1,4 @@
+from random import *
 def readFile(file: str)->list:
     """
     Читаем строки из файла и добавляем их в список
@@ -56,3 +57,74 @@ def translate(lang1: list, lang2: list):
     else:
         print('Такого слова нет в словаре')
         return False
+
+def correction(lang1: list, lang2: list, choice: int):
+    """
+    Ищем слово в файле и исправляем его
+
+    :param list lang1: Список первого языка
+    :param list lang2: Список второго языка
+    :param int choice: Выбор языка
+    """
+    print("Введите слово, перевод которого хотите исправить".center(70, ))
+    if choice == 1:
+        wordup = input('На русском: ')
+        word = wordup.lower()
+        check = wordSearch(word, lang1)
+    else:
+        wordup = input('На английском: ')
+        word = wordup.lower()
+        check = wordSearch(word, lang1)
+
+    if check == False:
+        print('Такого слова нет в словаре.')
+    else:
+        wordindex = lang1.index(word)
+        transword = lang2[wordindex]
+        print(f'Изначальный перевод - {transword}')
+        print('Введите заменяемое слово'.center(50, ))
+        if choice == 1:
+            replaceup = input('На английском: ')
+            replace = replaceup.lower()
+            with open ('eng.txt', 'r') as f:
+                old_data = f.read()
+            new_data = old_data.replace(transword, replace)
+            with open ('eng.txt', 'w') as f:
+                f.write(new_data)
+        else:
+            replaceup = input('На русском: ')
+            replace = replaceup.lower()
+            with open ('rus.txt', 'r') as f:
+                old_data = f.read()
+            new_data = old_data.replace(transword, replace)
+            with open ('rus.txt', 'w') as f:
+                f.write(new_data)
+
+def chekup(lang1: list, lang2: list):
+    """
+    Проверяет правильность перевода слов у пользователя
+
+    :param list lang1: Список первого языка
+    :param list lang2: Список второго языка
+    """
+    r = 0
+    i = 0
+    print('Вам будет даваться по пять слов один раз. Дается слово и рядом нужно написать его перевод\nПосле написания слова будет показано, верен ли перевод. В конце вы узнаете результат знания этих слов')
+    while True:
+        for i in range(5):
+            word = choice(lang1)
+            index = lang1.index(word)
+            transword = lang2[index]
+            chek = input(f'{i+1}. {word} - ')
+            if chek == transword:
+                i += 1
+                r += 1
+                print('Перевод верный')
+            else:
+                i += 1
+                print('Перевод не верный')
+        result = r/i * 100
+        print(f'Ваш результат: {r} правильных ответов, {result}%')
+        ans = input('Желаете закончить? y/n ')
+        if ans == 'y':
+            break
