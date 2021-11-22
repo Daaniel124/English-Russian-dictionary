@@ -1,11 +1,11 @@
 from module import *
 rus_list = readFile("rus.txt")
 eng_list = readFile("eng.txt")
-print(rus_list)
-print(eng_list)
+#print(rus_list)
+#print(eng_list)
 
 while True:
-    menu = input("Перевод - T\nНовое слово - U\nИсправить ошибку - V\nСамопроверка - K\nВыход - L\nПросмотр листов - P\n")
+    menu = input("Перевод - T\nНовое слово - U\nИсправить ошибку - V\nСамопроверка - K\nВыход - L\n")
     if menu.upper() == "T":
         v = int(input('С рус. на англ. или с англ. на рус. (1/2): '))
         if v == 1:
