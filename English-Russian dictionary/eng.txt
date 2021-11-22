@@ -1,0 +1,9 @@
+word
+bread
+table
+pc
+towel
+honey
+money
+telephone
+cookie

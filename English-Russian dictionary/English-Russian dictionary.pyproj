@@ -22,6 +22,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="English_Russian_dictionary.py" />
+    <Compile Include="module.py">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rus.txt" />
+    <Content Include="eng.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
