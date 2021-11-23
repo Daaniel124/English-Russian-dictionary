@@ -5,7 +5,7 @@ eng_list = readFile("eng.txt")
 #print(eng_list)
 
 while True:
-    menu = input("Перевод - T\nНовое слово - U\nИсправить ошибку - V\nСамопроверка - K\nВыход - L\n")
+    menu = input("Перевод - T\nНовое слово - U\nИсправить ошибку - V\nСамопроверка - K\nСинтез речи (Google) - R\nСинтез речи (pyttsx3) - S\nСинтез речи (текст) - A\nВыход - L\n")
     if menu.upper() == "T":
         v = int(input('С рус. на англ. или с англ. на рус. (1/2): '))
         if v == 1:
@@ -59,6 +59,22 @@ while True:
             lang2 = eng_list
             chekup(lang1, lang2)
         pass
+    elif menu.upper() == 'R':
+        ttsg()
+    elif menu.upper() == 'S':
+        ttsp()
+    elif menu.upper() == 'A':
+        choice = int(input('Выберите язык, слова которого будут воспроизводится - рус/англ 1/2: '))
+        if choice == 1:
+            words = ''
+            for word in rus_list:
+                words = words+" "+word
+            ttsAuto(words, 'ru')
+        else:
+            words = ''
+            for word in eng_list:
+                words = words+" "+word
+            ttsAuto(words, 'en')
     elif menu.upper() == 'P':
         print(rus_list)
         print(eng_list)

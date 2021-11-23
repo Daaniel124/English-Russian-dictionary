@@ -1,4 +1,7 @@
 from random import *
+from gtts import gTTS
+import os
+import pyttsx3
 def readFile(file: str)->list:
     """
     Читаем строки из файла и добавляем их в список
@@ -128,3 +131,39 @@ def chekup(lang1: list, lang2: list):
         ans = input('Желаете закончить? y/n ')
         if ans == 'y':
             break
+
+def ttsG():
+    '''
+    Синтез речи от Google
+    '''
+    #from playsound import playsound #pip install
+    print('Синтез речи'.center(24, ))
+    lang = int(input('На каком языке хотите воспроизводить речь? рус/англ - 1/2: '))
+    blabla = input('Введите слово: ')
+    if lang == 1:
+        tts = gTTS(text=blabla, lang='ru')
+        #tts.save("C:\\Users\\opilane\\Desktop\\test.mp3")
+        tts.save('test.mp3')
+    else:
+        tts = gTTS(text=blabla, lang='en')
+        #tts.save("C:\\Users\\opilane\\Desktop\\test.mp3")
+        tts.save('test.mp3')
+    #playsound()
+    #os.system('C:\\Users\\opilane\\Desktop\\test.mp3')
+    os.system('test.mp3')
+
+def ttsP():
+    #https://ichi.pro/ru/vvedenie-v-pyttsx3-preobrazovatel-teksta-v-rec-dla-python-81905511310787
+    engine = pyttsx3.init()
+    engine.say("Hello this is me talking")
+    engine.setProperty('rate',120)  #120 words per minute
+    engine.setProperty('volume',0.9) 
+    engine.runAndWait()
+
+def ttsAuto(text: str, lang: str):
+    '''
+    Синтез речи всех слов в списке
+    '''
+    #language = 'en', 'fi', 'ru'
+    obj = gTTS(text=text, lang=lang).save('test.mp3')
+    os.system('test.mp3')
